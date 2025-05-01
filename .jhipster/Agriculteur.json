@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20250501170104"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "typeProduction",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "anneeExperience",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "localisation",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Agriculteur",
+  "relationships": [
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "utilisateur",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,27 @@
+{
+  "agriCycleApp": {
+    "agriculteur": {
+      "home": {
+        "title": "Agriculteurs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Agriculteur",
+        "createOrEditLabel": "Create or edit a Agriculteur",
+        "notFound": "No Agriculteurs found"
+      },
+      "created": "A new Agriculteur is created with identifier {{ param }}",
+      "updated": "A Agriculteur is updated with identifier {{ param }}",
+      "deleted": "A Agriculteur is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Agriculteur {{ id }}?"
+      },
+      "detail": {
+        "title": "Agriculteur"
+      },
+      "id": "ID",
+      "typeProduction": "Type Production",
+      "anneeExperience": "Annee Experience",
+      "localisation": "Localisation",
+      "utilisateur": "Utilisateur"
+    }
+  }
+}

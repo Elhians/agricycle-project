@@ -1,0 +1,28 @@
+{
+  "agriCycleApp": {
+    "entreprise": {
+      "home": {
+        "title": "Entreprises",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Entreprise",
+        "createOrEditLabel": "Create or edit a Entreprise",
+        "notFound": "No Entreprises found"
+      },
+      "created": "A new Entreprise is created with identifier {{ param }}",
+      "updated": "A Entreprise is updated with identifier {{ param }}",
+      "deleted": "A Entreprise is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Entreprise {{ id }}?"
+      },
+      "detail": {
+        "title": "Entreprise"
+      },
+      "id": "ID",
+      "nomEntreprise": "Nom Entreprise",
+      "typeActivite": "Type Activite",
+      "licence": "Licence",
+      "adressePhysique": "Adresse Physique",
+      "utilisateur": "Utilisateur"
+    }
+  }
+}

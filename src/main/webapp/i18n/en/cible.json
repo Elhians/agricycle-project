@@ -1,0 +1,10 @@
+{
+  "agriCycleApp": {
+    "Cible": {
+      "null": "",
+      "POST": "POST",
+      "USER": "USER",
+      "TRANSACTION": "TRANSACTION"
+    }
+  }
+}

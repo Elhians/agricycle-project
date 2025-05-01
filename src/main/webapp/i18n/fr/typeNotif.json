@@ -1,0 +1,10 @@
+{
+  "agriCycleApp": {
+    "TypeNotif": {
+      "null": "",
+      "SIGNALEMENT": "SIGNALEMENT",
+      "MESSAGE": "MESSAGE",
+      "ACHAT": "ACHAT"
+    }
+  }
+}

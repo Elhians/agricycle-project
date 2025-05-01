@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20250501171404"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "typeMedia",
+      "fieldType": "TypeMedia",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TEXTE,IMAGE,VIDEO,AUDIO"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Media",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "post",
+      "relationshipName": "post",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

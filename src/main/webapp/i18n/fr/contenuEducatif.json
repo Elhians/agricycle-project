@@ -1,0 +1,29 @@
+{
+  "agriCycleApp": {
+    "contenuEducatif": {
+      "home": {
+        "title": "ContenuEducatifs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Contenu Educatif",
+        "createOrEditLabel": "Créer ou éditer un Contenu Educatif",
+        "notFound": "Aucun Contenu Educatif trouvé"
+      },
+      "created": "Un nouveau Contenu Educatif a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Contenu Educatif avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Contenu Educatif avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Contenu Educatif {{ id }} ?"
+      },
+      "detail": {
+        "title": "Contenu Educatif"
+      },
+      "id": "ID",
+      "titre": "Titre",
+      "description": "Description",
+      "typeMedia": "Type Media",
+      "url": "Url",
+      "datePublication": "Date Publication",
+      "auteur": "Auteur"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "annotations": {
+    "changelogDate": "20250501170004"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "passwordHash",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "UserRole",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "AGRICULTEUR,COMMERCANT,TRANSPORTEUR,CONSOMMATEUR,ORGANISATION,ENTREPRISE,ADMIN"
+    },
+    {
+      "fieldName": "dateInscription",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Utilisateur",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

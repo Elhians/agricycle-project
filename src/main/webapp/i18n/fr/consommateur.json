@@ -1,0 +1,25 @@
+{
+  "agriCycleApp": {
+    "consommateur": {
+      "home": {
+        "title": "Consommateurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Consommateur",
+        "createOrEditLabel": "Créer ou éditer un Consommateur",
+        "notFound": "Aucun Consommateur trouvé"
+      },
+      "created": "Un nouveau Consommateur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Consommateur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Consommateur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Consommateur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Consommateur"
+      },
+      "id": "ID",
+      "preferences": "Preferences",
+      "utilisateur": "Utilisateur"
+    }
+  }
+}

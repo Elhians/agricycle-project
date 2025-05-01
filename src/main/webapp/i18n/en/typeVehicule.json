@@ -1,0 +1,11 @@
+{
+  "agriCycleApp": {
+    "TypeVehicule": {
+      "null": "",
+      "VOITURE": "VOITURE",
+      "CAMION": "CAMION",
+      "CHARETTE": "CHARETTE",
+      "MOTO": "MOTO"
+    }
+  }
+}

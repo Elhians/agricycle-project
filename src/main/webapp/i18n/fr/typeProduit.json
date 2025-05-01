@@ -1,0 +1,9 @@
+{
+  "agriCycleApp": {
+    "TypeProduit": {
+      "null": "",
+      "PRODUIT": "PRODUIT",
+      "DECHET": "DECHET"
+    }
+  }
+}

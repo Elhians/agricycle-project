@@ -1,0 +1,9 @@
+{
+  "agriCycleApp": {
+    "StatutAnnonce": {
+      "null": "",
+      "OUVERT": "OUVERT",
+      "VENDU": "VENDU"
+    }
+  }
+}
