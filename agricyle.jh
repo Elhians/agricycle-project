@@ -1,0 +1,202 @@
+application {
+  config {
+    baseName AgriCycle
+    packageName com.agricycle.app
+    applicationType monolith
+    authenticationType jwt
+    prodDatabaseType postgresql
+    devDatabaseType h2Disk
+    buildTool maven
+    clientFramework react
+    enableSwaggerCodegen true
+    nativeLanguage en
+    languages [fr, en]
+  }
+  entities *
+}
+
+enum UserRole {
+  AGRICULTEUR, COMMERCANT, TRANSPORTEUR, CONSOMMATEUR, ORGANISATION, ENTREPRISE, ADMIN
+}
+
+enum TypeProduit {
+  PRODUIT, DECHET
+}
+
+enum StatutAnnonce {
+  OUVERT, VENDU
+}
+
+enum StatutPaiement {
+  ENCOURS, VALIDE, ANNULE
+}
+
+enum TypeNotif {
+  SIGNALEMENT, MESSAGE, ACHAT
+}
+
+enum TypeReaction {
+  LIKE, PARTAGE
+}
+
+enum TypeMedia {
+  TEXTE, IMAGE, VIDEO, AUDIO
+}
+
+enum Cible {
+  POST, USER, TRANSACTION
+}
+enum TypeVehicule{
+	VOITURE, CAMION, CHARETTE, MOTO
+}
+entity Utilisateur {
+  phone String required
+  passwordHash String required
+  email String
+  role UserRole required
+  dateInscription Instant
+}
+
+entity Agriculteur {
+  typeProduction String
+  anneeExperience Integer
+  localisation String
+}
+
+entity Commercant {
+  adresseCommerce String
+  moyenPaiement String
+}
+
+entity Transporteur {
+  zoneCouverture String
+  typeVehicule TypeVehicule
+  capacite Float
+}
+
+entity Consommateur {
+  preferences String
+}
+
+entity Organisation {
+  nomOrganisation String
+  siteWeb String
+}
+
+entity Entreprise {
+  nomEntreprise String
+  typeActivite String
+  licence String
+  adressePhysique String
+}
+
+entity Produit {
+  nom String required
+  description String
+  prix Double required
+  quantite Integer required
+  type TypeProduit required
+  statut StatutAnnonce required
+  imageUrl String
+  dateAjout Instant
+}
+
+entity Transaction {
+  date Instant required
+  statut StatutPaiement required
+  montant Double required
+}
+
+entity ContenuEducatif {
+  titre String required
+  description String
+  typeMedia TypeMedia required
+  url String required
+  datePublication Instant
+}
+
+entity Reaction {
+  type TypeReaction required
+  date Instant
+  cible Cible required
+}
+
+entity Notification {
+  type TypeNotif required
+  contenu String
+  date Instant
+}
+
+entity ChatbotSession {
+  dateDebut Instant
+  dateFin Instant
+}
+
+entity Post {
+  contenu String required
+  dateCreation Instant required
+}
+
+entity Media {
+  url String required
+  typeMedia TypeMedia required
+}
+
+entity Commentaire {
+  contenu String required
+  date Instant required
+}
+
+entity QRCode {
+  valeur String required
+  dateExpiration Instant
+}
+
+entity Paiement {
+  moyenPaiement String required
+  preuve String
+  date Instant
+}
+
+entity Signalement {
+  raison String required
+  cible Cible required
+  date Instant
+}
+
+relationship OneToOne {
+  Agriculteur{utilisateur} to Utilisateur
+  Commercant{utilisateur} to Utilisateur
+  Transporteur{utilisateur} to Utilisateur
+  Consommateur{utilisateur} to Utilisateur
+  Organisation{utilisateur} to Utilisateur
+  Entreprise{utilisateur} to Utilisateur
+}
+
+relationship ManyToOne {
+  Produit{vendeur} to Utilisateur
+  Produit{acheteur} to Utilisateur
+  Transaction{produit} to Produit
+  Transaction{acheteur} to Utilisateur
+  ContenuEducatif{auteur} to Utilisateur
+  Reaction{utilisateur} to Utilisateur
+  Notification{utilisateur} to Utilisateur
+  ChatbotSession{utilisateur} to Utilisateur
+  Post{auteur} to Utilisateur
+  Media{post} to Post
+  Commentaire{post} to Post
+  Commentaire{auteur} to Utilisateur
+  Reaction{post} to Post
+  Paiement{transaction} to Transaction
+  Paiement{acheteur} to Utilisateur
+  QRCode{transaction} to Transaction
+  Signalement{auteur} to Utilisateur
+  Signalement{ciblePost} to Post
+}
+
+paginate Produit, ContenuEducatif, Notification, Post, Media, Commentaire with infinite-scroll
+paginate Transaction, Paiement with pagination
+dto * with mapstruct
+service all with serviceClass
+filter *
+

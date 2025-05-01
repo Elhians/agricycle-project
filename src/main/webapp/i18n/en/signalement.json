@@ -1,0 +1,28 @@
+{
+  "agriCycleApp": {
+    "signalement": {
+      "home": {
+        "title": "Signalements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Signalement",
+        "createOrEditLabel": "Create or edit a Signalement",
+        "notFound": "No Signalements found"
+      },
+      "created": "A new Signalement is created with identifier {{ param }}",
+      "updated": "A Signalement is updated with identifier {{ param }}",
+      "deleted": "A Signalement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Signalement {{ id }}?"
+      },
+      "detail": {
+        "title": "Signalement"
+      },
+      "id": "ID",
+      "raison": "Raison",
+      "cible": "Cible",
+      "date": "Date",
+      "auteur": "Auteur",
+      "ciblePost": "Cible Post"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20250501171704"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "moyenPaiement",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "preuve",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Paiement",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "transaction",
+      "relationshipName": "transaction",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "acheteur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

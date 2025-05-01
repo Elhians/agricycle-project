@@ -1,0 +1,44 @@
+{
+  "annotations": {
+    "changelogDate": "20250501170804"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutPaiement",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ENCOURS,VALIDE,ANNULE"
+    },
+    {
+      "fieldName": "montant",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Transaction",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "produit",
+      "relationshipName": "produit",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "acheteur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

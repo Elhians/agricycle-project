@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20250501171104"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "TypeNotif",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "SIGNALEMENT,MESSAGE,ACHAT"
+    },
+    {
+      "fieldName": "contenu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Notification",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "utilisateur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

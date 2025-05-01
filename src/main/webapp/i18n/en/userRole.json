@@ -1,0 +1,14 @@
+{
+  "agriCycleApp": {
+    "UserRole": {
+      "null": "",
+      "AGRICULTEUR": "AGRICULTEUR",
+      "COMMERCANT": "COMMERCANT",
+      "TRANSPORTEUR": "TRANSPORTEUR",
+      "CONSOMMATEUR": "CONSOMMATEUR",
+      "ORGANISATION": "ORGANISATION",
+      "ENTREPRISE": "ENTREPRISE",
+      "ADMIN": "ADMIN"
+    }
+  }
+}

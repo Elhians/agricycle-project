@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20250501170604"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nomEntreprise",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeActivite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "licence",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adressePhysique",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Entreprise",
+  "relationships": [
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "utilisateur",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

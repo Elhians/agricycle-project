@@ -1,0 +1,32 @@
+{
+  "annotations": {
+    "changelogDate": "20250501171304"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "contenu",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateCreation",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Post",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "auteur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

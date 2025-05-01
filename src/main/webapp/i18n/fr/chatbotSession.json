@@ -1,0 +1,26 @@
+{
+  "agriCycleApp": {
+    "chatbotSession": {
+      "home": {
+        "title": "ChatbotSessions",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Chatbot Session",
+        "createOrEditLabel": "Créer ou éditer un Chatbot Session",
+        "notFound": "Aucun Chatbot Session trouvé"
+      },
+      "created": "Un nouveau Chatbot Session a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Chatbot Session avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Chatbot Session avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Chatbot Session {{ id }} ?"
+      },
+      "detail": {
+        "title": "Chatbot Session"
+      },
+      "id": "ID",
+      "dateDebut": "Date Debut",
+      "dateFin": "Date Fin",
+      "utilisateur": "Utilisateur"
+    }
+  }
+}

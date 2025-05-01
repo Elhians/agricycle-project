@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20250501170904"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "titre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "typeMedia",
+      "fieldType": "TypeMedia",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "TEXTE,IMAGE,VIDEO,AUDIO"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "datePublication",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "ContenuEducatif",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "auteur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

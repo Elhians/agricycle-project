@@ -1,0 +1,11 @@
+{
+  "agriCycleApp": {
+    "TypeMedia": {
+      "null": "",
+      "TEXTE": "TEXTE",
+      "IMAGE": "IMAGE",
+      "VIDEO": "VIDEO",
+      "AUDIO": "AUDIO"
+    }
+  }
+}

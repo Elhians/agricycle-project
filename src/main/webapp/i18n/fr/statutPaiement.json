@@ -1,0 +1,10 @@
+{
+  "agriCycleApp": {
+    "StatutPaiement": {
+      "null": "",
+      "ENCOURS": "ENCOURS",
+      "VALIDE": "VALIDE",
+      "ANNULE": "ANNULE"
+    }
+  }
+}

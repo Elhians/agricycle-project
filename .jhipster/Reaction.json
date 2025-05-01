@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20250501171004"
+  },
+  "applications": ["AgriCycle"],
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "TypeReaction",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LIKE,PARTAGE"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "cible",
+      "fieldType": "Cible",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "POST,USER,TRANSACTION"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Reaction",
+  "relationships": [
+    {
+      "otherEntityName": "utilisateur",
+      "relationshipName": "utilisateur",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "post",
+      "relationshipName": "post",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "AgriCycle",
+    "buildTool": "maven",
+    "clientFramework": "react",
+    "devDatabaseType": "h2Disk",
+    "enableSwaggerCodegen": true,
+    "entities": [
+      "Utilisateur",
+      "Agriculteur",
+      "Commercant",
+      "Transporteur",
+      "Consommateur",
+      "Organisation",
+      "Entreprise",
+      "Produit",
+      "Transaction",
+      "ContenuEducatif",
+      "Reaction",
+      "Notification",
+      "ChatbotSession",
+      "Post",
+      "Media",
+      "Commentaire",
+      "QRCode",
+      "Paiement",
+      "Signalement"
+    ],
+    "jhipsterVersion": "8.10.0",
+    "jwtSecretKey": "Y2FjZDIwYWNlMDZhYzNjZmQzYWNkNDZkMmQyZDA5ODQ0Mzc0NTI3YWU0ZmUxN2Q4MzI3MzI3ZDRhMTBmOGI0NzJkM2ZhYjkwN2U5MmQ2ZDc1ZjlhYmJkNDNjZWI0NTU1NDNlMjMwNjViOTQwYjMwZWFhY2U0MTcxMGNhMGZjMGY=",
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1746119884000,
+    "nativeLanguage": "en",
+    "packageName": "com.agricycle.app",
+    "prodDatabaseType": "postgresql"
+  }
+}
