@@ -22,7 +22,11 @@ loadIcons();
 const rootEl = document.getElementById('root');
 const root = createRoot(rootEl);
 
-const render = Component =>
+interface RenderProps {
+  Component: React.ComponentType;
+}
+
+const render = (Component: RenderProps['Component']): void =>
   root.render(
     <ErrorBoundary>
       <Provider store={store}>
