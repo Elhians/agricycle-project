@@ -2,9 +2,8 @@ package com.agricycle.service;
 
 import com.agricycle.model.Produit;
 import com.agricycle.repository.ProduitRepository;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ProduitService {

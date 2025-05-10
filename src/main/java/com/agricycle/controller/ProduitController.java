@@ -2,9 +2,8 @@ package com.agricycle.controller;
 
 import com.agricycle.model.Produit;
 import com.agricycle.service.ProduitService;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/produits")

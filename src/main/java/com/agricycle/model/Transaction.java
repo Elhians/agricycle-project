@@ -1,11 +1,9 @@
 package com.agricycle.model;
 
 import com.agricycle.model.Utilisateur;
-
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.time.LocalDate;
+import lombok.*;
 
 @Entity
 @Data
@@ -32,6 +30,6 @@ public class Transaction {
     public enum Statut {
         ENCOURS,
         VALIDE,
-        ANNULE
+        ANNULE,
     }
 }
