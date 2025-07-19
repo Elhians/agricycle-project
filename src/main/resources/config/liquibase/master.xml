@@ -39,6 +39,7 @@
     <include file="config/liquibase/changelog/20250501171704_added_entity_Paiement.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250501171804_added_entity_Signalement.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20250501170004_added_entity_constraints_Utilisateur.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250501170104_added_entity_constraints_Agriculteur.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250501170204_added_entity_constraints_Commercant.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20250501170304_added_entity_constraints_Transporteur.xml" relativeToChangelogFile="false"/>

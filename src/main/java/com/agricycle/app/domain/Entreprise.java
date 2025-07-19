@@ -36,7 +36,7 @@ public class Entreprise implements Serializable {
     private String adressePhysique;
 
     @JsonIgnoreProperties(
-        value = { "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
+        value = { "user", "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)

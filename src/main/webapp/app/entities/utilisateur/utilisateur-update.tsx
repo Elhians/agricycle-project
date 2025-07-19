@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
+import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
 import { UserRole } from 'app/shared/model/enumerations/user-role.model';
 import { createEntity, getEntity, reset, updateEntity } from './utilisateur.reducer';
 
@@ -18,6 +19,7 @@ export const UtilisateurUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
+  const users = useAppSelector(state => state.userManagement.users);
   const utilisateurEntity = useAppSelector(state => state.utilisateur.entity);
   const loading = useAppSelector(state => state.utilisateur.loading);
   const updating = useAppSelector(state => state.utilisateur.updating);
@@ -34,6 +36,8 @@ export const UtilisateurUpdate = () => {
     } else {
       dispatch(getEntity(id));
     }
+
+    dispatch(getUsers({}));
   }, []);
 
   useEffect(() => {
@@ -51,6 +55,7 @@ export const UtilisateurUpdate = () => {
     const entity = {
       ...utilisateurEntity,
       ...values,
+      user: users.find(it => it.id.toString() === values.user?.toString()),
     };
 
     if (isNew) {
@@ -69,6 +74,7 @@ export const UtilisateurUpdate = () => {
           role: 'AGRICULTEUR',
           ...utilisateurEntity,
           dateInscription: convertDateTimeFromServer(utilisateurEntity.dateInscription),
+          user: utilisateurEntity?.user?.id,
         };
 
   return (
@@ -107,23 +113,6 @@ export const UtilisateurUpdate = () => {
                 }}
               />
               <ValidatedField
-                label={translate('agriCycleApp.utilisateur.passwordHash')}
-                id="utilisateur-passwordHash"
-                name="passwordHash"
-                data-cy="passwordHash"
-                type="text"
-                validate={{
-                  required: { value: true, message: translate('entity.validation.required') },
-                }}
-              />
-              <ValidatedField
-                label={translate('agriCycleApp.utilisateur.email')}
-                id="utilisateur-email"
-                name="email"
-                data-cy="email"
-                type="text"
-              />
-              <ValidatedField
                 label={translate('agriCycleApp.utilisateur.role')}
                 id="utilisateur-role"
                 name="role"
@@ -144,6 +133,22 @@ export const UtilisateurUpdate = () => {
                 type="datetime-local"
                 placeholder="YYYY-MM-DD HH:mm"
               />
+              <ValidatedField
+                id="utilisateur-user"
+                name="user"
+                data-cy="user"
+                label={translate('agriCycleApp.utilisateur.user')}
+                type="select"
+              >
+                <option value="" key="0" />
+                {users
+                  ? users.map(otherEntity => (
+                      <option value={otherEntity.id} key={otherEntity.id}>
+                        {otherEntity.id}
+                      </option>
+                    ))
+                  : null}
+              </ValidatedField>
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/utilisateur" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

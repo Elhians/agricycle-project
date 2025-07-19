@@ -73,10 +73,9 @@ public class UtilisateurQueryService extends QueryService<Utilisateur> {
                 Boolean.TRUE.equals(criteria.getDistinct()) ? distinct(criteria.getDistinct()) : null,
                 buildRangeSpecification(criteria.getId(), Utilisateur_.id),
                 buildStringSpecification(criteria.getPhone(), Utilisateur_.phone),
-                buildStringSpecification(criteria.getPasswordHash(), Utilisateur_.passwordHash),
-                buildStringSpecification(criteria.getEmail(), Utilisateur_.email),
                 buildSpecification(criteria.getRole(), Utilisateur_.role),
                 buildRangeSpecification(criteria.getDateInscription(), Utilisateur_.dateInscription),
+                buildSpecification(criteria.getUserId(), root -> root.join(Utilisateur_.user, JoinType.LEFT).get(User_.id)),
                 buildSpecification(criteria.getAgriculteurId(), root ->
                     root.join(Utilisateur_.agriculteur, JoinType.LEFT).get(Agriculteur_.id)
                 ),

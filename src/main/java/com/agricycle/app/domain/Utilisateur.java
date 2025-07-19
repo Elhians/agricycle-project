@@ -31,13 +31,6 @@ public class Utilisateur implements Serializable {
     private String phone;
 
     @NotNull
-    @Column(name = "password_hash", nullable = false)
-    private String passwordHash;
-
-    @Column(name = "email")
-    private String email;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private UserRole role;
@@ -45,28 +38,32 @@ public class Utilisateur implements Serializable {
     @Column(name = "date_inscription")
     private Instant dateInscription;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private User user;
+
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Agriculteur agriculteur;
 
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Commercant commercant;
 
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Transporteur transporteur;
 
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Consommateur consommateur;
 
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Organisation organisation;
 
     @JsonIgnoreProperties(value = { "utilisateur" }, allowSetters = true)
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "utilisateur", cascade = CascadeType.ALL, orphanRemoval = true)
     private Entreprise entreprise;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -97,32 +94,6 @@ public class Utilisateur implements Serializable {
         this.phone = phone;
     }
 
-    public String getPasswordHash() {
-        return this.passwordHash;
-    }
-
-    public Utilisateur passwordHash(String passwordHash) {
-        this.setPasswordHash(passwordHash);
-        return this;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public Utilisateur email(String email) {
-        this.setEmail(email);
-        return this;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public UserRole getRole() {
         return this.role;
     }
@@ -147,6 +118,19 @@ public class Utilisateur implements Serializable {
 
     public void setDateInscription(Instant dateInscription) {
         this.dateInscription = dateInscription;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Utilisateur user(User user) {
+        this.setUser(user);
+        return this;
     }
 
     public Agriculteur getAgriculteur() {
@@ -288,8 +272,6 @@ public class Utilisateur implements Serializable {
         return "Utilisateur{" +
             "id=" + getId() +
             ", phone='" + getPhone() + "'" +
-            ", passwordHash='" + getPasswordHash() + "'" +
-            ", email='" + getEmail() + "'" +
             ", role='" + getRole() + "'" +
             ", dateInscription='" + getDateInscription() + "'" +
             "}";

@@ -35,7 +35,7 @@ public class Transporteur implements Serializable {
     private Float capacite;
 
     @JsonIgnoreProperties(
-        value = { "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
+        value = { "user", "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)

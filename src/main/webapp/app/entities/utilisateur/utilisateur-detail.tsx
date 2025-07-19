@@ -39,18 +39,6 @@ export const UtilisateurDetail = () => {
           </dt>
           <dd>{utilisateurEntity.phone}</dd>
           <dt>
-            <span id="passwordHash">
-              <Translate contentKey="agriCycleApp.utilisateur.passwordHash">Password Hash</Translate>
-            </span>
-          </dt>
-          <dd>{utilisateurEntity.passwordHash}</dd>
-          <dt>
-            <span id="email">
-              <Translate contentKey="agriCycleApp.utilisateur.email">Email</Translate>
-            </span>
-          </dt>
-          <dd>{utilisateurEntity.email}</dd>
-          <dt>
             <span id="role">
               <Translate contentKey="agriCycleApp.utilisateur.role">Role</Translate>
             </span>
@@ -66,6 +54,10 @@ export const UtilisateurDetail = () => {
               <TextFormat value={utilisateurEntity.dateInscription} type="date" format={APP_DATE_FORMAT} />
             ) : null}
           </dd>
+          <dt>
+            <Translate contentKey="agriCycleApp.utilisateur.user">User</Translate>
+          </dt>
+          <dd>{utilisateurEntity.user ? utilisateurEntity.user.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/utilisateur" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}

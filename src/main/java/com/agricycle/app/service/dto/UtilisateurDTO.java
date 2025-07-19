@@ -18,14 +18,11 @@ public class UtilisateurDTO implements Serializable {
     private String phone;
 
     @NotNull
-    private String passwordHash;
-
-    private String email;
-
-    @NotNull
     private UserRole role;
 
     private Instant dateInscription;
+
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -43,22 +40,6 @@ public class UtilisateurDTO implements Serializable {
         this.phone = phone;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public UserRole getRole() {
         return role;
     }
@@ -73,6 +54,14 @@ public class UtilisateurDTO implements Serializable {
 
     public void setDateInscription(Instant dateInscription) {
         this.dateInscription = dateInscription;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override
@@ -102,10 +91,9 @@ public class UtilisateurDTO implements Serializable {
         return "UtilisateurDTO{" +
             "id=" + getId() +
             ", phone='" + getPhone() + "'" +
-            ", passwordHash='" + getPasswordHash() + "'" +
-            ", email='" + getEmail() + "'" +
             ", role='" + getRole() + "'" +
             ", dateInscription='" + getDateInscription() + "'" +
+            ", user=" + getUser() +
             "}";
     }
 }

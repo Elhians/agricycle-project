@@ -8,8 +8,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.agricycle.app.IntegrationTest;
+import com.agricycle.app.domain.User;
 import com.agricycle.app.domain.Utilisateur;
 import com.agricycle.app.domain.enumeration.UserRole;
+import com.agricycle.app.repository.UserRepository;
 import com.agricycle.app.repository.UtilisateurRepository;
 import com.agricycle.app.service.dto.UtilisateurDTO;
 import com.agricycle.app.service.mapper.UtilisateurMapper;
@@ -40,12 +42,6 @@ class UtilisateurResourceIT {
     private static final String DEFAULT_PHONE = "AAAAAAAAAA";
     private static final String UPDATED_PHONE = "BBBBBBBBBB";
 
-    private static final String DEFAULT_PASSWORD_HASH = "AAAAAAAAAA";
-    private static final String UPDATED_PASSWORD_HASH = "BBBBBBBBBB";
-
-    private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
-    private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
     private static final UserRole DEFAULT_ROLE = UserRole.AGRICULTEUR;
     private static final UserRole UPDATED_ROLE = UserRole.COMMERCANT;
 
@@ -63,6 +59,9 @@ class UtilisateurResourceIT {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private UtilisateurMapper utilisateurMapper;
@@ -84,12 +83,7 @@ class UtilisateurResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Utilisateur createEntity() {
-        return new Utilisateur()
-            .phone(DEFAULT_PHONE)
-            .passwordHash(DEFAULT_PASSWORD_HASH)
-            .email(DEFAULT_EMAIL)
-            .role(DEFAULT_ROLE)
-            .dateInscription(DEFAULT_DATE_INSCRIPTION);
+        return new Utilisateur().phone(DEFAULT_PHONE).role(DEFAULT_ROLE).dateInscription(DEFAULT_DATE_INSCRIPTION);
     }
 
     /**
@@ -99,12 +93,7 @@ class UtilisateurResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Utilisateur createUpdatedEntity() {
-        return new Utilisateur()
-            .phone(UPDATED_PHONE)
-            .passwordHash(UPDATED_PASSWORD_HASH)
-            .email(UPDATED_EMAIL)
-            .role(UPDATED_ROLE)
-            .dateInscription(UPDATED_DATE_INSCRIPTION);
+        return new Utilisateur().phone(UPDATED_PHONE).role(UPDATED_ROLE).dateInscription(UPDATED_DATE_INSCRIPTION);
     }
 
     @BeforeEach
@@ -181,23 +170,6 @@ class UtilisateurResourceIT {
 
     @Test
     @Transactional
-    void checkPasswordHashIsRequired() throws Exception {
-        long databaseSizeBeforeTest = getRepositoryCount();
-        // set the field null
-        utilisateur.setPasswordHash(null);
-
-        // Create the Utilisateur, which fails.
-        UtilisateurDTO utilisateurDTO = utilisateurMapper.toDto(utilisateur);
-
-        restUtilisateurMockMvc
-            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(om.writeValueAsBytes(utilisateurDTO)))
-            .andExpect(status().isBadRequest());
-
-        assertSameRepositoryCount(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     void checkRoleIsRequired() throws Exception {
         long databaseSizeBeforeTest = getRepositoryCount();
         // set the field null
@@ -226,8 +198,6 @@ class UtilisateurResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(utilisateur.getId().intValue())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
-            .andExpect(jsonPath("$.[*].passwordHash").value(hasItem(DEFAULT_PASSWORD_HASH)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE.toString())))
             .andExpect(jsonPath("$.[*].dateInscription").value(hasItem(DEFAULT_DATE_INSCRIPTION.toString())));
     }
@@ -245,8 +215,6 @@ class UtilisateurResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(utilisateur.getId().intValue()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE))
-            .andExpect(jsonPath("$.passwordHash").value(DEFAULT_PASSWORD_HASH))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
             .andExpect(jsonPath("$.role").value(DEFAULT_ROLE.toString()))
             .andExpect(jsonPath("$.dateInscription").value(DEFAULT_DATE_INSCRIPTION.toString()));
     }
@@ -318,112 +286,6 @@ class UtilisateurResourceIT {
 
     @Test
     @Transactional
-    void getAllUtilisateursByPasswordHashIsEqualToSomething() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where passwordHash equals to
-        defaultUtilisateurFiltering("passwordHash.equals=" + DEFAULT_PASSWORD_HASH, "passwordHash.equals=" + UPDATED_PASSWORD_HASH);
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByPasswordHashIsInShouldWork() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where passwordHash in
-        defaultUtilisateurFiltering(
-            "passwordHash.in=" + DEFAULT_PASSWORD_HASH + "," + UPDATED_PASSWORD_HASH,
-            "passwordHash.in=" + UPDATED_PASSWORD_HASH
-        );
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByPasswordHashIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where passwordHash is not null
-        defaultUtilisateurFiltering("passwordHash.specified=true", "passwordHash.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByPasswordHashContainsSomething() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where passwordHash contains
-        defaultUtilisateurFiltering("passwordHash.contains=" + DEFAULT_PASSWORD_HASH, "passwordHash.contains=" + UPDATED_PASSWORD_HASH);
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByPasswordHashNotContainsSomething() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where passwordHash does not contain
-        defaultUtilisateurFiltering(
-            "passwordHash.doesNotContain=" + UPDATED_PASSWORD_HASH,
-            "passwordHash.doesNotContain=" + DEFAULT_PASSWORD_HASH
-        );
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByEmailIsEqualToSomething() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where email equals to
-        defaultUtilisateurFiltering("email.equals=" + DEFAULT_EMAIL, "email.equals=" + UPDATED_EMAIL);
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByEmailIsInShouldWork() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where email in
-        defaultUtilisateurFiltering("email.in=" + DEFAULT_EMAIL + "," + UPDATED_EMAIL, "email.in=" + UPDATED_EMAIL);
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByEmailIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where email is not null
-        defaultUtilisateurFiltering("email.specified=true", "email.specified=false");
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByEmailContainsSomething() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where email contains
-        defaultUtilisateurFiltering("email.contains=" + DEFAULT_EMAIL, "email.contains=" + UPDATED_EMAIL);
-    }
-
-    @Test
-    @Transactional
-    void getAllUtilisateursByEmailNotContainsSomething() throws Exception {
-        // Initialize the database
-        insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
-
-        // Get all the utilisateurList where email does not contain
-        defaultUtilisateurFiltering("email.doesNotContain=" + UPDATED_EMAIL, "email.doesNotContain=" + DEFAULT_EMAIL);
-    }
-
-    @Test
-    @Transactional
     void getAllUtilisateursByRoleIsEqualToSomething() throws Exception {
         // Initialize the database
         insertedUtilisateur = utilisateurRepository.saveAndFlush(utilisateur);
@@ -488,6 +350,28 @@ class UtilisateurResourceIT {
         defaultUtilisateurFiltering("dateInscription.specified=true", "dateInscription.specified=false");
     }
 
+    @Test
+    @Transactional
+    void getAllUtilisateursByUserIsEqualToSomething() throws Exception {
+        User user;
+        if (TestUtil.findAll(em, User.class).isEmpty()) {
+            utilisateurRepository.saveAndFlush(utilisateur);
+            user = UserResourceIT.createEntity();
+        } else {
+            user = TestUtil.findAll(em, User.class).get(0);
+        }
+        em.persist(user);
+        em.flush();
+        utilisateur.setUser(user);
+        utilisateurRepository.saveAndFlush(utilisateur);
+        Long userId = user.getId();
+        // Get all the utilisateurList where user equals to userId
+        defaultUtilisateurShouldBeFound("userId.equals=" + userId);
+
+        // Get all the utilisateurList where user equals to (userId + 1)
+        defaultUtilisateurShouldNotBeFound("userId.equals=" + (userId + 1));
+    }
+
     private void defaultUtilisateurFiltering(String shouldBeFound, String shouldNotBeFound) throws Exception {
         defaultUtilisateurShouldBeFound(shouldBeFound);
         defaultUtilisateurShouldNotBeFound(shouldNotBeFound);
@@ -503,8 +387,6 @@ class UtilisateurResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(utilisateur.getId().intValue())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE)))
-            .andExpect(jsonPath("$.[*].passwordHash").value(hasItem(DEFAULT_PASSWORD_HASH)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].role").value(hasItem(DEFAULT_ROLE.toString())))
             .andExpect(jsonPath("$.[*].dateInscription").value(hasItem(DEFAULT_DATE_INSCRIPTION.toString())));
 
@@ -554,12 +436,7 @@ class UtilisateurResourceIT {
         Utilisateur updatedUtilisateur = utilisateurRepository.findById(utilisateur.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedUtilisateur are not directly saved in db
         em.detach(updatedUtilisateur);
-        updatedUtilisateur
-            .phone(UPDATED_PHONE)
-            .passwordHash(UPDATED_PASSWORD_HASH)
-            .email(UPDATED_EMAIL)
-            .role(UPDATED_ROLE)
-            .dateInscription(UPDATED_DATE_INSCRIPTION);
+        updatedUtilisateur.phone(UPDATED_PHONE).role(UPDATED_ROLE).dateInscription(UPDATED_DATE_INSCRIPTION);
         UtilisateurDTO utilisateurDTO = utilisateurMapper.toDto(updatedUtilisateur);
 
         restUtilisateurMockMvc
@@ -649,8 +526,6 @@ class UtilisateurResourceIT {
         Utilisateur partialUpdatedUtilisateur = new Utilisateur();
         partialUpdatedUtilisateur.setId(utilisateur.getId());
 
-        partialUpdatedUtilisateur.dateInscription(UPDATED_DATE_INSCRIPTION);
-
         restUtilisateurMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedUtilisateur.getId())
@@ -680,12 +555,7 @@ class UtilisateurResourceIT {
         Utilisateur partialUpdatedUtilisateur = new Utilisateur();
         partialUpdatedUtilisateur.setId(utilisateur.getId());
 
-        partialUpdatedUtilisateur
-            .phone(UPDATED_PHONE)
-            .passwordHash(UPDATED_PASSWORD_HASH)
-            .email(UPDATED_EMAIL)
-            .role(UPDATED_ROLE)
-            .dateInscription(UPDATED_DATE_INSCRIPTION);
+        partialUpdatedUtilisateur.phone(UPDATED_PHONE).role(UPDATED_ROLE).dateInscription(UPDATED_DATE_INSCRIPTION);
 
         restUtilisateurMockMvc
             .perform(

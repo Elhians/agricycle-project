@@ -44,13 +44,11 @@ public class UtilisateurCriteria implements Serializable, Criteria {
 
     private StringFilter phone;
 
-    private StringFilter passwordHash;
-
-    private StringFilter email;
-
     private UserRoleFilter role;
 
     private InstantFilter dateInscription;
+
+    private LongFilter userId;
 
     private LongFilter agriculteurId;
 
@@ -71,10 +69,9 @@ public class UtilisateurCriteria implements Serializable, Criteria {
     public UtilisateurCriteria(UtilisateurCriteria other) {
         this.id = other.optionalId().map(LongFilter::copy).orElse(null);
         this.phone = other.optionalPhone().map(StringFilter::copy).orElse(null);
-        this.passwordHash = other.optionalPasswordHash().map(StringFilter::copy).orElse(null);
-        this.email = other.optionalEmail().map(StringFilter::copy).orElse(null);
         this.role = other.optionalRole().map(UserRoleFilter::copy).orElse(null);
         this.dateInscription = other.optionalDateInscription().map(InstantFilter::copy).orElse(null);
+        this.userId = other.optionalUserId().map(LongFilter::copy).orElse(null);
         this.agriculteurId = other.optionalAgriculteurId().map(LongFilter::copy).orElse(null);
         this.commercantId = other.optionalCommercantId().map(LongFilter::copy).orElse(null);
         this.transporteurId = other.optionalTransporteurId().map(LongFilter::copy).orElse(null);
@@ -127,44 +124,6 @@ public class UtilisateurCriteria implements Serializable, Criteria {
         this.phone = phone;
     }
 
-    public StringFilter getPasswordHash() {
-        return passwordHash;
-    }
-
-    public Optional<StringFilter> optionalPasswordHash() {
-        return Optional.ofNullable(passwordHash);
-    }
-
-    public StringFilter passwordHash() {
-        if (passwordHash == null) {
-            setPasswordHash(new StringFilter());
-        }
-        return passwordHash;
-    }
-
-    public void setPasswordHash(StringFilter passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public StringFilter getEmail() {
-        return email;
-    }
-
-    public Optional<StringFilter> optionalEmail() {
-        return Optional.ofNullable(email);
-    }
-
-    public StringFilter email() {
-        if (email == null) {
-            setEmail(new StringFilter());
-        }
-        return email;
-    }
-
-    public void setEmail(StringFilter email) {
-        this.email = email;
-    }
-
     public UserRoleFilter getRole() {
         return role;
     }
@@ -201,6 +160,25 @@ public class UtilisateurCriteria implements Serializable, Criteria {
 
     public void setDateInscription(InstantFilter dateInscription) {
         this.dateInscription = dateInscription;
+    }
+
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public Optional<LongFilter> optionalUserId() {
+        return Optional.ofNullable(userId);
+    }
+
+    public LongFilter userId() {
+        if (userId == null) {
+            setUserId(new LongFilter());
+        }
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
     }
 
     public LongFilter getAgriculteurId() {
@@ -348,10 +326,9 @@ public class UtilisateurCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(phone, that.phone) &&
-            Objects.equals(passwordHash, that.passwordHash) &&
-            Objects.equals(email, that.email) &&
             Objects.equals(role, that.role) &&
             Objects.equals(dateInscription, that.dateInscription) &&
+            Objects.equals(userId, that.userId) &&
             Objects.equals(agriculteurId, that.agriculteurId) &&
             Objects.equals(commercantId, that.commercantId) &&
             Objects.equals(transporteurId, that.transporteurId) &&
@@ -367,10 +344,9 @@ public class UtilisateurCriteria implements Serializable, Criteria {
         return Objects.hash(
             id,
             phone,
-            passwordHash,
-            email,
             role,
             dateInscription,
+            userId,
             agriculteurId,
             commercantId,
             transporteurId,
@@ -387,10 +363,9 @@ public class UtilisateurCriteria implements Serializable, Criteria {
         return "UtilisateurCriteria{" +
             optionalId().map(f -> "id=" + f + ", ").orElse("") +
             optionalPhone().map(f -> "phone=" + f + ", ").orElse("") +
-            optionalPasswordHash().map(f -> "passwordHash=" + f + ", ").orElse("") +
-            optionalEmail().map(f -> "email=" + f + ", ").orElse("") +
             optionalRole().map(f -> "role=" + f + ", ").orElse("") +
             optionalDateInscription().map(f -> "dateInscription=" + f + ", ").orElse("") +
+            optionalUserId().map(f -> "userId=" + f + ", ").orElse("") +
             optionalAgriculteurId().map(f -> "agriculteurId=" + f + ", ").orElse("") +
             optionalCommercantId().map(f -> "commercantId=" + f + ", ").orElse("") +
             optionalTransporteurId().map(f -> "transporteurId=" + f + ", ").orElse("") +

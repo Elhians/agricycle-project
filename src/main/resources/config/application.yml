@@ -62,7 +62,7 @@ management:
       enabled: true
   health:
     mail:
-      enabled: false # When using the MailService, configure an SMTP server and set this to true
+      enabled: true # When using the MailService, configure an SMTP server and set this to true
   prometheus:
     metrics:
       export:
@@ -166,6 +166,15 @@ spring:
   output:
     ansi:
       console-available: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: espbudget@gmail.com
+    password: iwijddtdgzgfzncu
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
 
 server:
   servlet:
@@ -199,7 +208,9 @@ jhipster:
   #   allow-credentials: true
   #   max-age: 1800
   mail:
-    from: AgriCycle@localhost
+    from: espbudget@gmail.com
+    base-url: http://localhost:8080
+
   api-docs:
     default-include-pattern: /api/**
     management-include-pattern: /management/**

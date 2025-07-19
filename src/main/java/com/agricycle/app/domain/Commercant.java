@@ -30,7 +30,7 @@ public class Commercant implements Serializable {
     private String moyenPaiement;
 
     @JsonIgnoreProperties(
-        value = { "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
+        value = { "user", "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
         allowSetters = true
     )
     @OneToOne(fetch = FetchType.LAZY)

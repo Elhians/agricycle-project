@@ -1,7 +1,21 @@
 package com.agricycle.app.web.rest;
 
+import com.agricycle.app.domain.Agriculteur;
+import com.agricycle.app.domain.Commercant;
+import com.agricycle.app.domain.Consommateur;
+import com.agricycle.app.domain.Entreprise;
+import com.agricycle.app.domain.Organisation;
+import com.agricycle.app.domain.Transporteur;
 import com.agricycle.app.domain.User;
+import com.agricycle.app.domain.Utilisateur;
+import com.agricycle.app.repository.AgriculteurRepository;
+import com.agricycle.app.repository.CommercantRepository;
+import com.agricycle.app.repository.ConsommateurRepository;
+import com.agricycle.app.repository.EntrepriseRepository;
+import com.agricycle.app.repository.OrganisationRepository;
+import com.agricycle.app.repository.TransporteurRepository;
 import com.agricycle.app.repository.UserRepository;
+import com.agricycle.app.repository.UtilisateurRepository;
 import com.agricycle.app.security.SecurityUtils;
 import com.agricycle.app.service.MailService;
 import com.agricycle.app.service.UserService;
@@ -11,6 +25,7 @@ import com.agricycle.app.web.rest.errors.*;
 import com.agricycle.app.web.rest.vm.KeyAndPasswordVM;
 import com.agricycle.app.web.rest.vm.ManagedUserVM;
 import jakarta.validation.Valid;
+import java.time.Instant;
 import java.util.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -40,10 +55,42 @@ public class AccountResource {
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    private final UtilisateurRepository utilisateurRepository;
+
+    private final AgriculteurRepository agriculteurRepository;
+
+    private final CommercantRepository commercantRepository;
+
+    private final TransporteurRepository transporteurRepository;
+
+    private final ConsommateurRepository consommateurRepository;
+
+    private final OrganisationRepository organisationRepository;
+
+    private final EntrepriseRepository entrepriseRepository;
+
+    public AccountResource(
+        UserRepository userRepository,
+        UserService userService,
+        MailService mailService,
+        UtilisateurRepository utilisateurRepository,
+        AgriculteurRepository agriculteurRepository,
+        CommercantRepository commercantRepository,
+        TransporteurRepository transporteurRepository,
+        ConsommateurRepository consommateurRepository,
+        OrganisationRepository organisationRepository,
+        EntrepriseRepository entrepriseRepository
+    ) {
         this.userRepository = userRepository;
         this.userService = userService;
         this.mailService = mailService;
+        this.utilisateurRepository = utilisateurRepository;
+        this.agriculteurRepository = agriculteurRepository;
+        this.commercantRepository = commercantRepository;
+        this.transporteurRepository = transporteurRepository;
+        this.consommateurRepository = consommateurRepository;
+        this.organisationRepository = organisationRepository;
+        this.entrepriseRepository = entrepriseRepository;
     }
 
     /**
@@ -61,7 +108,50 @@ public class AccountResource {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
+        userRepository.saveAndFlush(user);
         mailService.sendActivationEmail(user);
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setPhone(managedUserVM.getPhone());
+        utilisateur.setRole(managedUserVM.getRole());
+        utilisateur.setDateInscription(Instant.now());
+        utilisateur.setUser(user);
+        utilisateurRepository.saveAndFlush(utilisateur);
+
+        Map<String, Object> details = managedUserVM.getProfilDetails();
+
+        switch (managedUserVM.getRole()) {
+            case AGRICULTEUR -> {
+                Agriculteur agri = new Agriculteur();
+                agri.setUtilisateur(utilisateur);
+                agriculteurRepository.save(agri);
+            }
+            case COMMERCANT -> {
+                Commercant c = new Commercant();
+                c.setUtilisateur(utilisateur);
+                commercantRepository.save(c);
+            }
+            case TRANSPORTEUR -> {
+                Transporteur t = new Transporteur();
+                t.setUtilisateur(utilisateur);
+                transporteurRepository.save(t);
+            }
+            case CONSOMMATEUR -> {
+                Consommateur c = new Consommateur();
+                c.setUtilisateur(utilisateur);
+                consommateurRepository.save(c);
+            }
+            case ORGANISATION -> {
+                Organisation org = new Organisation();
+                org.setUtilisateur(utilisateur);
+                organisationRepository.save(org);
+            }
+            case ENTREPRISE -> {
+                Entreprise e = new Entreprise();
+                e.setUtilisateur(utilisateur);
+                entrepriseRepository.save(e);
+            }
+            default -> throw new IllegalArgumentException("Rôle métier non reconnu");
+        }
     }
 
     /**

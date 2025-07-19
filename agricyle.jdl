@@ -51,8 +51,6 @@ enum TypeVehicule{
 }
 entity Utilisateur {
   phone String required
-  passwordHash String required
-  email String
   role UserRole required
   dateInscription Instant
 }
@@ -171,8 +169,8 @@ relationship OneToOne {
   Consommateur{utilisateur} to Utilisateur
   Organisation{utilisateur} to Utilisateur
   Entreprise{utilisateur} to Utilisateur
+  Utilisateur{user} to User with builtInEntity
 }
-
 relationship ManyToOne {
   Produit{vendeur} to Utilisateur
   Produit{acheteur} to Utilisateur

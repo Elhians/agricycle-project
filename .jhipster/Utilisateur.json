@@ -11,15 +11,6 @@
       "fieldValidateRules": ["required"]
     },
     {
-      "fieldName": "passwordHash",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "email",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "role",
       "fieldType": "UserRole",
       "fieldValidateRules": ["required"],
@@ -32,7 +23,15 @@
   ],
   "jpaMetamodelFiltering": true,
   "name": "Utilisateur",
-  "relationships": [],
+  "relationships": [
+    {
+      "otherEntityName": "user",
+      "relationshipName": "user",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one",
+      "relationshipWithBuiltInEntity": true
+    }
+  ],
   "searchEngine": "no",
   "service": "serviceClass"
 }

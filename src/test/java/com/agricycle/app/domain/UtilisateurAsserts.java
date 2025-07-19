@@ -48,8 +48,6 @@ public class UtilisateurAsserts {
         assertThat(actual)
             .as("Verify Utilisateur relevant properties")
             .satisfies(a -> assertThat(a.getPhone()).as("check phone").isEqualTo(expected.getPhone()))
-            .satisfies(a -> assertThat(a.getPasswordHash()).as("check passwordHash").isEqualTo(expected.getPasswordHash()))
-            .satisfies(a -> assertThat(a.getEmail()).as("check email").isEqualTo(expected.getEmail()))
             .satisfies(a -> assertThat(a.getRole()).as("check role").isEqualTo(expected.getRole()))
             .satisfies(a -> assertThat(a.getDateInscription()).as("check dateInscription").isEqualTo(expected.getDateInscription()));
     }

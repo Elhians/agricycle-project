@@ -91,14 +91,6 @@ export const Utilisateur = () => {
                   <Translate contentKey="agriCycleApp.utilisateur.phone">Phone</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('phone')} />
                 </th>
-                <th className="hand" onClick={sort('passwordHash')}>
-                  <Translate contentKey="agriCycleApp.utilisateur.passwordHash">Password Hash</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('passwordHash')} />
-                </th>
-                <th className="hand" onClick={sort('email')}>
-                  <Translate contentKey="agriCycleApp.utilisateur.email">Email</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('email')} />
-                </th>
                 <th className="hand" onClick={sort('role')}>
                   <Translate contentKey="agriCycleApp.utilisateur.role">Role</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('role')} />
@@ -106,6 +98,9 @@ export const Utilisateur = () => {
                 <th className="hand" onClick={sort('dateInscription')}>
                   <Translate contentKey="agriCycleApp.utilisateur.dateInscription">Date Inscription</Translate>{' '}
                   <FontAwesomeIcon icon={getSortIconByFieldName('dateInscription')} />
+                </th>
+                <th>
+                  <Translate contentKey="agriCycleApp.utilisateur.user">User</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -119,8 +114,6 @@ export const Utilisateur = () => {
                     </Button>
                   </td>
                   <td>{utilisateur.phone}</td>
-                  <td>{utilisateur.passwordHash}</td>
-                  <td>{utilisateur.email}</td>
                   <td>
                     <Translate contentKey={`agriCycleApp.UserRole.${utilisateur.role}`} />
                   </td>
@@ -129,6 +122,7 @@ export const Utilisateur = () => {
                       <TextFormat type="date" value={utilisateur.dateInscription} format={APP_DATE_FORMAT} />
                     ) : null}
                   </td>
+                  <td>{utilisateur.user ? utilisateur.user.id : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/utilisateur/${utilisateur.id}`} color="info" size="sm" data-cy="entityDetailsButton">

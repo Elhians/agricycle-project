@@ -5,6 +5,7 @@
     "baseName": "AgriCycle",
     "buildTool": "maven",
     "clientFramework": "react",
+    "creationTimestamp": 1752751836044,
     "devDatabaseType": "h2Disk",
     "enableSwaggerCodegen": true,
     "entities": [

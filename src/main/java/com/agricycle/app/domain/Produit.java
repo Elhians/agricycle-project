@@ -60,14 +60,14 @@ public class Produit implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
+        value = { "user", "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
         allowSetters = true
     )
     private Utilisateur vendeur;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
+        value = { "user", "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
         allowSetters = true
     )
     private Utilisateur acheteur;

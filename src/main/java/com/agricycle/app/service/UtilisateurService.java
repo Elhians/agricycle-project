@@ -1,6 +1,7 @@
 package com.agricycle.app.service;
 
 import com.agricycle.app.domain.Utilisateur;
+import com.agricycle.app.repository.UserRepository;
 import com.agricycle.app.repository.UtilisateurRepository;
 import com.agricycle.app.service.dto.UtilisateurDTO;
 import com.agricycle.app.service.mapper.UtilisateurMapper;
@@ -27,9 +28,16 @@ public class UtilisateurService {
 
     private final UtilisateurMapper utilisateurMapper;
 
-    public UtilisateurService(UtilisateurRepository utilisateurRepository, UtilisateurMapper utilisateurMapper) {
+    private final UserRepository userRepository;
+
+    public UtilisateurService(
+        UtilisateurRepository utilisateurRepository,
+        UtilisateurMapper utilisateurMapper,
+        UserRepository userRepository
+    ) {
         this.utilisateurRepository = utilisateurRepository;
         this.utilisateurMapper = utilisateurMapper;
+        this.userRepository = userRepository;
     }
 
     /**
@@ -171,10 +179,20 @@ public class UtilisateurService {
     /**
      * Delete the utilisateur by id.
      *
-     * @param id the id of the entity.
+     * @param utilisateurId the id of the entity.
      */
-    public void delete(Long id) {
-        LOG.debug("Request to delete Utilisateur : {}", id);
-        utilisateurRepository.deleteById(id);
+    @Transactional
+    public void delete(Long utilisateurId) {
+        utilisateurRepository
+            .findById(utilisateurId)
+            .ifPresent(utilisateur -> {
+                // Supprime d'abord le User s’il existe
+                if (utilisateur.getUser() != null) {
+                    userRepository.delete(utilisateur.getUser());
+                }
+
+                // Ensuite le reste (agriculteur, etc.) sera supprimé automatiquement via cascade
+                utilisateurRepository.delete(utilisateur);
+            });
     }
 }

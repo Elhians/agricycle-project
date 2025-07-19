@@ -77,10 +77,9 @@ class UtilisateurCriteriaTest {
     private static void setAllFilters(UtilisateurCriteria utilisateurCriteria) {
         utilisateurCriteria.id();
         utilisateurCriteria.phone();
-        utilisateurCriteria.passwordHash();
-        utilisateurCriteria.email();
         utilisateurCriteria.role();
         utilisateurCriteria.dateInscription();
+        utilisateurCriteria.userId();
         utilisateurCriteria.agriculteurId();
         utilisateurCriteria.commercantId();
         utilisateurCriteria.transporteurId();
@@ -95,10 +94,9 @@ class UtilisateurCriteriaTest {
             criteria ->
                 condition.apply(criteria.getId()) &&
                 condition.apply(criteria.getPhone()) &&
-                condition.apply(criteria.getPasswordHash()) &&
-                condition.apply(criteria.getEmail()) &&
                 condition.apply(criteria.getRole()) &&
                 condition.apply(criteria.getDateInscription()) &&
+                condition.apply(criteria.getUserId()) &&
                 condition.apply(criteria.getAgriculteurId()) &&
                 condition.apply(criteria.getCommercantId()) &&
                 condition.apply(criteria.getTransporteurId()) &&
@@ -115,10 +113,9 @@ class UtilisateurCriteriaTest {
             criteria ->
                 condition.apply(criteria.getId(), copy.getId()) &&
                 condition.apply(criteria.getPhone(), copy.getPhone()) &&
-                condition.apply(criteria.getPasswordHash(), copy.getPasswordHash()) &&
-                condition.apply(criteria.getEmail(), copy.getEmail()) &&
                 condition.apply(criteria.getRole(), copy.getRole()) &&
                 condition.apply(criteria.getDateInscription(), copy.getDateInscription()) &&
+                condition.apply(criteria.getUserId(), copy.getUserId()) &&
                 condition.apply(criteria.getAgriculteurId(), copy.getAgriculteurId()) &&
                 condition.apply(criteria.getCommercantId(), copy.getCommercantId()) &&
                 condition.apply(criteria.getTransporteurId(), copy.getTransporteurId()) &&

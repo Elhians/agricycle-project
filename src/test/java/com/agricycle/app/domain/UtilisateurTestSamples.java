@@ -10,18 +10,14 @@ public class UtilisateurTestSamples {
     private static final AtomicLong longCount = new AtomicLong(random.nextInt() + (2 * Integer.MAX_VALUE));
 
     public static Utilisateur getUtilisateurSample1() {
-        return new Utilisateur().id(1L).phone("phone1").passwordHash("passwordHash1").email("email1");
+        return new Utilisateur().id(1L).phone("phone1");
     }
 
     public static Utilisateur getUtilisateurSample2() {
-        return new Utilisateur().id(2L).phone("phone2").passwordHash("passwordHash2").email("email2");
+        return new Utilisateur().id(2L).phone("phone2");
     }
 
     public static Utilisateur getUtilisateurRandomSampleGenerator() {
-        return new Utilisateur()
-            .id(longCount.incrementAndGet())
-            .phone(UUID.randomUUID().toString())
-            .passwordHash(UUID.randomUUID().toString())
-            .email(UUID.randomUUID().toString());
+        return new Utilisateur().id(longCount.incrementAndGet()).phone(UUID.randomUUID().toString());
     }
 }

@@ -42,7 +42,7 @@ public class Reaction implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(
-        value = { "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
+        value = { "user", "agriculteur", "commercant", "transporteur", "consommateur", "organisation", "entreprise" },
         allowSetters = true
     )
     private Utilisateur utilisateur;
