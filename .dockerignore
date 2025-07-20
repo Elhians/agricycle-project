@@ -1,0 +1,19 @@
+# Maven / Java
+target
+*.iml
+.idea
+*.log
+
+# Git
+.git
+.gitignore
+
+# Frontend
+node_modules
+src/main/webapp/
+npm-debug.log
+.angular/
+dist/
+.yarn
+.yarnrc.yml
+.vscode

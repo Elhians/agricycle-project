@@ -7,8 +7,12 @@ node_modules/
 npm-debug.log.*
 /.awcache/*
 /.cache-loader/*
-src/main/webapp
-.angular
+src/main/webapp/
+.angular/
+npm-debug.log
+dist/
+.yarn
+.yarnrc.yml
 ######################
 # SASS
 ######################
